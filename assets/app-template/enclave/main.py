@@ -6,7 +6,7 @@ Run locally (mock mode, no enclave needed):
     IN_ENCLAVE=false uvicorn main:app --host 0.0.0.0 --port {{APP_PORT}} --reload
 
 Odyn mock URL: http://odyn.sparsity.cloud:18000
-Full Odyn API: see references/odyn-api.md in the nova-app-builder skill
+Full Odyn API: see references/odyn-api.md in the build-nova-app-claw-skill skill
 """
 
 import os

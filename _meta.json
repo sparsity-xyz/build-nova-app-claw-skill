@@ -1,6 +1,5 @@
 {
-  "ownerId": "kn75ynxa3j63qghnfr97w02xzs81vyrg",
-  "slug": "nova-app-builder",
+  "slug": "build-nova-app-claw-skill",
   "version": "2.2.1",
-  "publishedAt": 1772270897079
+  "repo": "https://github.com/sparsity-xyz/build-nova-app-claw-skill"
 }

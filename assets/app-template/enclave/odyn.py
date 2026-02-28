@@ -4,7 +4,7 @@ odyn.py — Lightweight client for the Odyn Internal API.
 In enclave:  http://127.0.0.1:18000
 Local mock:  http://odyn.sparsity.cloud:18000  (set IN_ENCLAVE=false)
 
-Full API reference: skills/nova-app-builder/references/odyn-api.md
+Full API reference: skills/build-nova-app-claw-skill/references/odyn-api.md
 """
 
 import base64

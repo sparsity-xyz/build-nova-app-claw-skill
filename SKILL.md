@@ -1,5 +1,5 @@
 ---
-name: nova-app-builder
+name: build-nova-app-claw-skill
 description: "Build and deploy Nova Platform apps (TEE apps on Sparsity Nova / sparsity.cloud). Use when a user wants to create a Nova app, write enclave application code, build it into a Docker image, and deploy it to the Nova Platform to get a live running URL. Handles the full lifecycle: scaffold, code, build, push, deploy, verify running. Triggers on requests like 'build me a Nova app', 'deploy to Nova Platform', 'create a TEE app on sparsity.cloud', 'I want to run an enclave app on Nova'."
 ---
 
@@ -20,7 +20,7 @@ Nova apps run inside AWS Nitro Enclaves, managed by **Enclaver** (Sparsity editi
 
 > **Ensure skill is up to date before starting:**
 > ```bash
-> clawhub update nova-app-builder
+> git -C /path/to/build-nova-app-claw-skill pull origin main
 > ```
 > Older versions are missing `Dockerfile.txt` in the template, causing scaffold to fail.
 
@@ -65,7 +65,7 @@ This generates `<output-dir>/<app-name>/` with the following structure:
     └── requirements.txt
 ```
 
-> **Note**: The template ships as `Dockerfile.txt` (clawhub cannot distribute extensionless files). `scaffold.py` automatically renames it to `Dockerfile` and substitutes the port. No manual action needed.
+> **Note**: The template ships as `Dockerfile.txt` (GitHub cannot distribute extensionless files in skill templates). `scaffold.py` automatically renames it to `Dockerfile` and substitutes the port. No manual action needed.
 
 Alternatively, fork [nova-app-template](https://github.com/sparsity-xyz/nova-app-template) — a production-ready starter with KMS, S3, App Wallet, E2E encryption, and a built-in React frontend.
 
@@ -350,9 +350,9 @@ After registration, anyone can verify on-chain that this running instance matche
 
 | Symptom | Fix |
 |---|---|
-| `Dockerfile` missing after scaffold | Run `clawhub update nova-app-builder` then re-scaffold. The template ships as `Dockerfile.txt` and scaffold renames it to `Dockerfile` automatically. |
-| scaffold fails / `enclaver.yaml` or `config.py` expected | You have an old version. Run `clawhub update nova-app-builder`. These files are no longer needed — `advanced` field at app creation replaces all manual config. |
-| API endpoint `console.sparsity.cloud` not resolving | Old version of `nova_deploy.py`. Run `clawhub update nova-app-builder`. Correct endpoint is `https://sparsity.cloud/api`. |
+| `Dockerfile` missing after scaffold | Run `git pull` in the skill directory then re-scaffold. The template ships as `Dockerfile.txt` and scaffold renames it to `Dockerfile` automatically. |
+| scaffold fails / `enclaver.yaml` or `config.py` expected | You have an old version. Run `git pull` in the skill directory. These files are no longer needed — `advanced` field at app creation replaces all manual config. |
+| API endpoint `console.sparsity.cloud` not resolving | Old version of `nova_deploy.py`. Run `git pull` in the skill directory. Correct endpoint is `https://sparsity.cloud/api`. |
 | Build stuck in `pending` | Check GitHub Actions in nova build repo; may be queued |
 | Build `failed` | Check `error_message` in build response; usually Dockerfile issue |
 | Deploy API returns 401 | Regenerate API key at sparsity.cloud |
