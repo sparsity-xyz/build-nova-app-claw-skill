@@ -5,7 +5,7 @@ Author: [@zfdang](https://github.com/zfdang)
 
 ## Installation
 
-Copy paste this into your OpenClaw to ask it to install this skill from this GitHub repo:
+Copy paste the following into your OpenClaw to install the skill directly from GitHub:
 
 ```
 Clone the skill repo directly into your OpenClaw
