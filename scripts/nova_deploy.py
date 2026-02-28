@@ -26,7 +26,7 @@ Workflow:
     3. Poll build until success
     4. POST /api/apps/{sqid}/deployments      — deploy the build
     5. Poll deployment until running
-    6. (optional, prompted) On-chain registration:
+    6. On-chain registration:
        a. POST /api/apps/{sqid}/create-onchain
        b. POST /api/apps/{sqid}/builds/{id}/enroll
        c. POST /api/zkproof/generate
@@ -308,22 +308,6 @@ def register_onchain(sqid: str, build_id: int, deploy_id: int, api_key: str, pol
     raise TimeoutError("On-chain registration timed out.")
 
 
-# ── Interactive prompt ────────────────────────────────────────────────────────
-
-def ask_onchain() -> bool:
-    print("\nOn-chain registration establishes verifiable trust:")
-    print("  6a. Register app in Nova App Registry (Base Sepolia)")
-    print("  6b. Record EIF PCR measurements on-chain")
-    print("  6c. Generate ZK proof from enclave attestation")
-    print("  6d. Link live instance to enrolled build on-chain")
-    print()
-    try:
-        answer = input("Run on-chain registration? [y/N]: ").strip().lower()
-        return answer in ("y", "yes")
-    except (EOFError, KeyboardInterrupt):
-        return False
-
-
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def main() -> None:
@@ -337,8 +321,6 @@ def main() -> None:
     parser.add_argument("--version", default="1.0.0", help="Semver version (default: 1.0.0)")
     parser.add_argument("--directory", default="/", help="Subdirectory with Dockerfile (default: /)")
     parser.add_argument("--api-key", required=True, help="Nova Platform API key")
-    parser.add_argument("--onchain", action="store_true", help="Run on-chain registration (skip prompt)")
-    parser.add_argument("--no-onchain", action="store_true", help="Skip on-chain registration (skip prompt)")
     parser.add_argument("--dry-run", action="store_true", help="Print config and exit without deploying")
     parser.add_argument("--poll-interval", type=int, default=15, help="Poll interval in seconds (default: 15)")
     parser.add_argument("--timeout", type=int, default=900, help="Total timeout in seconds (default: 900)")
@@ -354,7 +336,7 @@ def main() -> None:
         print(f"  Version    : {args.version}")
         print(f"  Port       : {args.port}")
         print(f"  Directory  : {args.directory}")
-        print(f"  On-chain   : {'yes' if args.onchain else 'no' if args.no_onchain else 'prompt'}")
+        print(f"  On-chain   : yes (always)")
         print(f"  Advanced   :")
         print(json.dumps(advanced, indent=4))
         return
@@ -377,18 +359,8 @@ def main() -> None:
 ╚══════════════════════════════════════════════════════════════╝
 """)
 
-        if args.no_onchain:
-            run_onchain = False
-        elif args.onchain:
-            run_onchain = True
-        else:
-            run_onchain = ask_onchain()
-
-        if run_onchain:
-            register_onchain(sqid, build_id, deploy_id, args.api_key, args.poll_interval, args.timeout)
-            print("\n✅  On-chain registration complete.")
-        else:
-            print("Skipped on-chain registration.")
+        register_onchain(sqid, build_id, deploy_id, args.api_key, args.poll_interval, args.timeout)
+        print("\n✅  On-chain registration complete.")
 
         if app_url:
             print(f"\nVerify:\n  curl {app_url}/\n  curl {app_url}/api/hello\n  curl -X POST {app_url}/.well-known/attestation\n")
