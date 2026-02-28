@@ -48,7 +48,7 @@ CREATE APP ──► TRIGGER BUILD ──► DEPLOY
         REGISTER INSTANCE ON-CHAIN
 ```
 
-> The platform auto-generates `enclaver.yaml` and `nova-build.yaml` in app-hub at build time. **Do not write these files yourself.**
+> Your repo only needs `Dockerfile` + app code. The platform handles the build pipeline automatically.
 
 ---
 
@@ -62,7 +62,7 @@ Authorization: Bearer <token>
 ```
 
 Pass only **`advanced`** — the `enclaver` field has been removed from the API.
-The platform uses `advanced` to auto-generate `enclaver.yaml` at build time.
+The platform uses `advanced` to configure the build pipeline automatically.
 
 #### `advanced` field
 
@@ -119,7 +119,7 @@ Pattern syntax:
 A request is allowed if it matches **at least one** allow pattern AND **no** deny pattern.
 If `egress_allow` is empty, all egress is disabled.
 
-Full reference: https://github.com/sparsity-xyz/enclaver/blob/sparsity/docs/enclaver.yaml
+Full reference: https://sparsity.cloud/resources/nova-api/create-app-guide
 
 #### Feature dependency rules
 
