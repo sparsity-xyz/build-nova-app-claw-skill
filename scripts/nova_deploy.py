@@ -53,7 +53,7 @@ def make_advanced_config(
     enable_kms: bool = False,
     enable_s3: bool = False,
     enable_wallet: bool = False,
-    enable_helios: bool = False,
+    enable_helios: bool = True,
     helios_chains: list | None = None,
 ) -> dict:
     return {
@@ -67,10 +67,10 @@ def make_advanced_config(
         "enable_ipfs_storage": False,
         "enable_walrus_storage": False,
         "enable_app_wallet": enable_wallet,
-        "enable_helios_rpc": enable_helios,
+        "enable_helios_rpc": True,  # Always enabled — enclave needs on-chain access
         "helios_chains": helios_chains or [
-            {"chain_id": "1", "kind": "ethereum", "network": "mainnet",
-             "execution_rpc": "", "local_rpc_port": 18545}
+            {"chain_id": "84532", "kind": "opstack", "network": "base-sepolia",
+             "execution_rpc": "https://sepolia.base.org", "local_rpc_port": 18545},
         ],
     }
 
