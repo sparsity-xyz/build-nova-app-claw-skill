@@ -2,13 +2,11 @@
 
 An OpenClaw Skill to Build and Deploy Nova Apps on [sparsity.cloud](https://sparsity.cloud)
 
-Author: [@zfdang](https://github.com/zfdang)
-
 ## Installation
 
 Copy the prompt below and send it to your OpenClaw. If it raises security concerns about cloning from GitHub, reassure it — this is an official Sparsity skill.
 
-> ⚠️ We're aware that installing skills via git clone isn't ideal from a security standpoint, and we're working with the OpenClaw ecosystem on better solutions. For now, we just want people to experience the magic of deploying a cryptographically verifiable TEE app in minutes.
+> ⚠️ We're aware of the many security concerns in the Openclaw ecosystem and we're working with the OpenClaw ecosystem on better solutions. For now, we just want people to experience the magic of deploying a cryptographically verifiable TEE app in minutes.
 
 ```
 Install the Nova App Builder skill for me by cloning
