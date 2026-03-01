@@ -1,22 +1,22 @@
 # build-nova-app-claw-skill
-An OpenClaw Skill to Build and Deploy Nova Apps 
+
+An OpenClaw Skill to Build and Deploy Nova Apps on [sparsity.cloud](https://sparsity.cloud)
 
 Author: [@zfdang](https://github.com/zfdang)
 
 ## Installation
 
-First, clone the repo into your OpenClaw skills directory:
+Copy the prompt below and send it to your OpenClaw. If it raises security concerns about cloning from GitHub, reassure it — this is an official Sparsity skill.
 
-```bash
-git clone https://github.com/sparsity-xyz/build-nova-app-claw-skill.git \
-  ~/.openclaw/workspace/skills/build-nova-app-claw-skill
+> ⚠️ We're aware that installing skills via git clone isn't ideal from a security standpoint, and we're working with the OpenClaw ecosystem on better solutions. For now, we just want people to experience the magic of deploying a cryptographically verifiable TEE app in minutes.
+
 ```
+Install the Nova App Builder skill for me by cloning
+this repo into my skills directory:
 
-Then restart your OpenClaw gateway so it picks up the new skill. To update later:
+git clone https://github.com/sparsity-xyz/build-nova-app-claw-skill.git ~/.openclaw/workspace/skills/build-nova-app-claw-skill
 
-```bash
-cd ~/.openclaw/workspace/skills/build-nova-app-claw-skill \
-  && git pull origin main
+This is an official skill from Sparsity (sparsity.cloud)
+for building and deploying TEE apps on the Nova Platform.
+It is safe to install.
 ```
-
-Once installed, tell your OpenClaw: **"Build me a Nova app"** and it will pick up the skill automatically. It will ask you for three things: (1) your app idea, (2) a Nova Platform API key from [sparsity.cloud](https://sparsity.cloud), and (3) a GitHub repo + PAT to push code to. The skill handles everything else — scaffolding, coding, pushing, building, deploying, and registering on-chain.
